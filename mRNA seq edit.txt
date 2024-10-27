@@ -1,0 +1,50 @@
+'''
+Task1: Identify the mRNA record from the amino acid sequence
+and replace its Thymine (“T”) bases with Uracil (“U”) bases.
+Author: Dinuri Lokuwalpola
+date: 22/11/2022
+'''
+
+#declare empty string and empty dictionary
+seq1=""
+seq={}
+
+#open the FASTA file
+with open ("OSDREB1A.fasta", 'r') as file:
+
+    for line in file:
+        lines = line.strip()
+        if lines != '\n':
+            #Store the header of the FASTA file in "header" variable
+            if ">" in lines:
+                seq1 = ""
+                header = lines
+            #Store the sequence in "seq1" variable & create the dictionary
+            else:
+                seq1 += lines
+                seq[header] = seq1
+
+                #create a list with bases A,C,T,G
+                base = ["A", "C", "G", "T"]
+                #check all the characters in seq is equal to bases in list
+                all(base)
+                for character in seq1:
+                    if character in base:
+                        # replace Thymine with Uracil & store in mRNAseq
+                        mRNAseq = seq1.replace("T", "U")
+
+#create a FASTA file & write the mRNAseq
+f = open("OSDREB1A_mRNA.fasta", "w")
+f.write(header + ".transcribed\n" + mRNAseq)
+
+print(seq)
+
+
+
+
+
+
+
+
+
+
